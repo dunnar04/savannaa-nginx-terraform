@@ -1,0 +1,19 @@
+# Terraform working files
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+
+# Local settings (copy terraform.tfvars.example instead)
+terraform.tfvars
+*.auto.tfvars
+
+# Provider schema dump
+schema.json
+
+# Never commit keys
+*.pem
+id_rsa*
+.env

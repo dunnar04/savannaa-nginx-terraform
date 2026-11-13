@@ -1,0 +1,11 @@
+# Copy to terraform.tfvars and change what you need.
+# Every setting has a default, so this file is optional.
+# Do NOT put your API key here. Use: export SWS_API_KEY="ctk_..."
+
+region           = "ng-lagos-1"      # or ng-abuja-1
+instance_plan    = "t3.micro"        # Free Tier: t2.micro or t3.micro
+network_name     = "default"
+allowed_ssh_cidr = "0.0.0.0/0"       # better: your public IP + /32, e.g. "102.89.10.20/32"
+
+# ssh_public_key_file  = "~/.ssh/id_rsa.pub"
+# ssh_private_key_file = "~/.ssh/id_rsa"
