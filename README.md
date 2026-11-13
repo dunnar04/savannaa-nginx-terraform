@@ -31,7 +31,7 @@ You need:
 
 ```bash
 # 1. Get the code
-git clone <this-repo-url>
+git clone https://github.com/dunnar04/savannaa-nginx-terraform.git
 cd <repo-folder>
 
 # 2. Give Terraform your API key (never put it in a file in this repo)
