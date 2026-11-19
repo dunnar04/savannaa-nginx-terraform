@@ -32,10 +32,11 @@ You need:
 ```bash
 # 1. Get the code
 git clone https://github.com/dunnar04/savannaa-nginx-terraform.git
-cd <repo-folder>
+cd savannaa-nginx-terraform
 
 # 2. Give Terraform your API key (never put it in a file in this repo)
-export SWS_API_KEY="ctk_your_key_here"
+export SWS_API_KEY="ctk_your_key_here"          # Linux, macOS, Git Bash
+# $env:SWS_API_KEY = "ctk_your_key_here"        # Windows PowerShell
 
 # 3. (Optional) Change the settings
 cp terraform.tfvars.example terraform.tfvars
@@ -64,6 +65,7 @@ All settings have defaults, so `terraform.tfvars` is optional.
 
 | Variable | Default | What it does |
 |---|---|---|
+| `prefix` | `nginx-demo` | Start of every resource name. Change it to run a second copy in the same account |
 | `region` | `ng-abuja-1` | Where to build: `ng-abuja-1` or `ng-lagos-1` |
 | `instance_plan` | `t3.micro` | VM size. Free Tier accounts can only use `t2.micro` or `t3.micro` |
 | `network_name` | `default` | Network to join. Every account gets one called `default` |
@@ -97,6 +99,7 @@ terraform destroy
 | `Missing API key` | Run `export SWS_API_KEY="ctk_..."` in the same terminal |
 | `403 insufficient_scope` | Your API key is missing a Write scope. The error names it |
 | `403 ... Only the SWS Free Tier instance types` | Set `instance_plan = "t3.micro"` |
+| `already exists` / name clash on the key pair or security group | Something named `nginx-demo` is already in your account. Set `prefix = "something-else"` |
 | `Value for undeclared variable "region"` | Your `main.tf` is out of date. Pull the latest version |
 | Install step stuck on "Connecting to remote host via SSH..." then times out | SSH is blocked. Attach `nginx-demo-sg` to the VM in the console, then run `terraform apply` again |
 | Website won't load but apply worked | Port 80 is blocked. Attach `nginx-demo-sg` to the VM |

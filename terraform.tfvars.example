@@ -2,6 +2,7 @@
 # Every setting has a default, so this file is optional.
 # Do NOT put your API key here. Use: export SWS_API_KEY="ctk_..."
 
+prefix           = "nginx-demo"      # change to run a second copy
 region           = "ng-lagos-1"      # or ng-abuja-1
 instance_plan    = "t3.micro"        # Free Tier: t2.micro or t3.micro
 network_name     = "default"

@@ -32,6 +32,12 @@ variable "allowed_ssh_cidr" {
   default     = "0.0.0.0/0"
 }
 
+variable "prefix" {
+  type        = string
+  description = "Start of every resource name. Change it to run more than one copy in the same account."
+  default     = "nginx-demo"
+}
+
 variable "instance_plan" {
   type        = string
   description = "VM size. Free Tier accounts can only use t2.micro or t3.micro."
@@ -55,7 +61,7 @@ variable "ssh_private_key_file" {
 data "sws_image" "os" { name = "Ubuntu 22.04 LTS" }
 
 resource "sws_keypair" "demo" {
-  name       = "nginx-demo"
+  name       = var.prefix
   public_key = file(pathexpand(var.ssh_public_key_file))
 }
 
@@ -64,7 +70,7 @@ resource "sws_keypair" "demo" {
 # Attach it once in the Savannaa console (see notes in chat).
 
 resource "sws_security_group" "web" {
-  name        = "nginx-demo-sg"
+  name        = "${var.prefix}-sg"
   description = "SSH from my IP, HTTP/HTTPS from anywhere"
 }
 
@@ -104,7 +110,7 @@ resource "sws_security_group_rule" "https" {
 # --- The VM ---------------------------------------------------------------
 
 resource "sws_instance" "vm" {
-  name       = "nginx-demo-vm"
+  name       = "${var.prefix}-vm"
   plan       = var.instance_plan
   image      = data.sws_image.os.id
   network_id = data.sws_network.net.id
